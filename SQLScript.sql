@@ -332,9 +332,9 @@
 
 CREATE VIEW ListinoPizze2 AS
 SELECT Pizza.Nome, Pizza.Prezzo,
-	   STUFF((SELECT ' , '+  I.Nome
+	   STUFF((SELECT ', '+  I.Nome
 	         FROM Ingrediente I, Composizione C
-			 WHERE I.IdIngrediente = C.IdIngrediente
+			 WHERE I.IdIngrediente = C.IdIngrediente and Pizza.IdPizza = C.IdPizza
 			 ORDER BY Pizza.IdPizza
 			 FOR XML PATH('')), 1, 1, '') [Ingredienti]
 FROM Pizza 
